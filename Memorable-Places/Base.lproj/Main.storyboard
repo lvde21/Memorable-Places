@@ -48,7 +48,7 @@
                     <navigationItem key="navigationItem" title="Root View Controller" id="asj-V0-teR">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9iB-Jm-m9R">
                             <connections>
-                                <segue destination="vXZ-lx-hvc" kind="show" id="1wK-4A-Fkx"/>
+                                <segue destination="vXZ-lx-hvc" kind="show" identifier="newPlace" id="1wK-4A-Fkx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -75,6 +75,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="nn2-iV-2p5"/>
+        <segue reference="1wK-4A-Fkx"/>
     </inferredMetricsTieBreakers>
 </document>

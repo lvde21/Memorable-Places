@@ -43,18 +43,17 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             annotation.coordinate = location
             annotation.title = places[activePlace]["name"]
             self.map.addAnnotation(annotation)
-
-        
+            
+            
+            var uilpgr = UILongPressGestureRecognizer(target: self, action: "action:")
+            uilpgr.minimumPressDuration = 2
+            map.addGestureRecognizer(uilpgr)
         }
-        
-        
-        
-        
     }
 
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
-        //println(locations)
+        println(locations)
         
         var userLocation:CLLocation = locations[0] as CLLocation
         var latitude = userLocation.coordinate.latitude
@@ -75,6 +74,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func action(gestureRecognizer: UIGestureRecognizer) {
+        
+        println("Gesture Recognized")
         
         //ensure that only 1 long press runs once
         if gestureRecognizer.state == UIGestureRecognizerState.Began {
@@ -111,21 +112,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             
 
             
-            if (address == "" || address == " ") {
-                
-                address = "Added \(NSDate())"
-                
-            }
-                
+                if (address == "" || address == " ") {
+                    address = "Added \(NSDate())"
+                }
+            
                 places.append(["name" : address, "lat" : "\(newCoordinate.latitude)", "lon" : "\(newCoordinate.longitude)"])
             
+                var annotation = MKPointAnnotation()
+                annotation.coordinate = newCoordinate
+                annotation.title = address
+                self.map.addAnnotation(annotation)
             
-            var annotation = MKPointAnnotation()
-            annotation.coordinate = newCoordinate
-            annotation.title = address
-            self.map.addAnnotation(annotation)
-            
-        })
+            })
           
         }
     }
