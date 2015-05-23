@@ -116,12 +116,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     address = "Added \(NSDate())"
                 }
             
+                //add it for permanent storage
                 places.append(["name" : address, "lat" : "\(newCoordinate.latitude)", "lon" : "\(newCoordinate.longitude)"])
-            
+                NSUserDefaults.standardUserDefaults().setObject(places, forKey: "places")
+                
+                
                 var annotation = MKPointAnnotation()
                 annotation.coordinate = newCoordinate
                 annotation.title = address
                 self.map.addAnnotation(annotation)
+                
+                
+                
+                
             
             })
           

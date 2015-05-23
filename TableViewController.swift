@@ -18,6 +18,12 @@ class TableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if(NSUserDefaults.standardUserDefaults().objectForKey("places") != nil) {
+            
+            //restores items from NSUserDefaults when the app is reopened
+            places = NSUserDefaults.standardUserDefaults().objectForKey("places") as [Dictionary]
+        }
 
         //create an example place
         if places.count == 1  {
@@ -59,6 +65,18 @@ class TableViewController: UITableViewController {
         
         return indexPath
     }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            
+            places.removeAtIndex(indexPath.row)
+            
+            NSUserDefaults.standardUserDefaults().setObject(places, forKey: "places")
+        }
+        tableView.reloadData();
+    }
+
     
     override func viewWillAppear(animated: Bool) {
         
